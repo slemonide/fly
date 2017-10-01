@@ -13,19 +13,18 @@ class Player(SpaceBody):
         self.vt = 1
         self.t = 0
 
-        self.rotation = 0
+        self.rotation = math.pi/2
 
-        self.image = pygame.image.load("assets/player.png")
-
-    pass
+        self.up_image = pygame.image.load("assets/player.png")
+        self.image = pygame.transform.rotate(self.up_image, self.rotation * 180/math.pi)
 
     def thrust_forward(self):
-        self.x += ACCELERATION * math.cos(self.rotation)
-        self.y += ACCELERATION * math.cos(self.rotation)
+        self.vx += ACCELERATION * math.cos(self.rotation)
+        self.vy += ACCELERATION * math.sin(self.rotation)
 
     def thrust_backwards(self):
-        self.x -= ACCELERATION * math.cos(self.rotation)
-        self.y -= ACCELERATION * math.cos(self.rotation)
+        self.vx -= ACCELERATION * math.cos(self.rotation)
+        self.vy -= ACCELERATION * math.sin(self.rotation)
 
     def rotate_right(self):
         self.rotation -= ROTATION_SPEED
@@ -38,7 +37,7 @@ class Player(SpaceBody):
         self.update_sprite()
 
     def update_sprite(self):
-        pass
+        self.image = pygame.transform.rotate(self.up_image, self.rotation * 180/math.pi)
 
     def update(self, dt):
         super(Player, self).update(dt)
