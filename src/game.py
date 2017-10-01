@@ -57,8 +57,8 @@ class Game:
         for body in SpaceBody.space_bodies:
             display.blit(body.image, body
                          .image.get_rect()
-                         .move((body.x - self.player.x)*SCALE + SCREEN_WIDTH/2,
-                               (-body.y + self.player.y)*SCALE + SCREEN_HEIGHT/2))
+                         .move((body.x - self.player.x)*SCALE - body.image.get_rect().width/2 + SCREEN_WIDTH/2,
+                               (-body.y + self.player.y)*SCALE - body.image.get_rect().height/2 + SCREEN_HEIGHT/2))
 
         pygame.display.flip()
 
