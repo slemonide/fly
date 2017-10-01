@@ -1,13 +1,9 @@
-import pygame
-from settings import *
-from screens.menu import main_menu
+from src.game import Game
+
 
 def main():
-    pygame.init()
-    pygame.joystick.init()
-    display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    main_menu(display).run()
-
+    game = Game()
+    game.run()
 
 if __name__ == '__main__':
     main()
