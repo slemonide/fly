@@ -20,6 +20,8 @@ class Game:
         Game.game = self
 
         pygame.init()
+        pygame.mixer.music.load("assets/music/420.wav")
+        pygame.mixer.music.play(loops=-1, start=0.0)
         self.clock = pygame.time.Clock()
 
         self.display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
