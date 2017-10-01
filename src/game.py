@@ -9,7 +9,7 @@ from src.space_body import SpaceBody
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TEXT_HEIGHT = 20
-FPS = 25
+FPS = 60
 SCALE = 20 # 1 lsec is 20 pixels
 
 
