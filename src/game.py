@@ -17,6 +17,10 @@ class Game:
     game = None
 
     def __init__(self):
+        self.controls = {"up": False,
+                         "down": False,
+                         "left": False,
+                         "right": False}
         Game.game = self
 
         pygame.init()
@@ -75,16 +79,35 @@ class Game:
                     self.quit_game()
 
                 if event.key == pygame.K_UP:
-                    self.player.thrust_forward()
+                    self.controls["up"] = True
                 if event.key == pygame.K_DOWN:
-                    self.player.thrust_backwards()
+                    self.controls["down"] = True
                 if event.key == pygame.K_RIGHT:
-                    self.player.rotate_right()
+                    self.controls["right"] = True
                 if event.key == pygame.K_LEFT:
-                    self.player.rotate_left()
+                    self.controls["left"] = True
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_UP:
+                    self.controls["up"] = False
+                if event.key == pygame.K_DOWN:
+                    self.controls["down"] = False
+                if event.key == pygame.K_RIGHT:
+                    self.controls["right"] = False
+                if event.key == pygame.K_LEFT:
+                    self.controls["left"] = False
 
     def update_environment(self):
         dt = self.clock.tick(FPS) / 1000
+
+        if self.controls["up"]:
+            self.player.thrust_forward()
+        if self.controls["down"]:
+            self.player.thrust_backwards()
+        if self.controls["right"]:
+            self.player.rotate_right()
+        if self.controls["left"]:
+            self.player.rotate_left()
 
         for body in SpaceBody.space_bodies:
             body.update(dt)
