@@ -16,3 +16,7 @@ class SpaceBody:
         # Can't exceed speed of light
         assert abs(self.vx) <= 1
         assert abs(self.vy) <= 1
+
+    def get_screen_pos(self, player, scale, width, height):
+        return ((self.x - player.x) * scale - self.image.get_rect().width / 2 + width / 2,
+                (-self.y + player.y) * scale - self.image.get_rect().height / 2 + height / 2)

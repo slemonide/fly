@@ -61,8 +61,7 @@ class Game:
         for body in SpaceBody.space_bodies:
             display.blit(body.image, body
                          .image.get_rect()
-                         .move((body.x - self.player.x)*SCALE - body.image.get_rect().width/2 + SCREEN_WIDTH/2,
-                               (-body.y + self.player.y)*SCALE - body.image.get_rect().height/2 + SCREEN_HEIGHT/2))
+                         .move(*body.get_screen_pos(self.player, SCALE, SCREEN_WIDTH, SCREEN_HEIGHT)))
 
         pygame.display.flip()
 
@@ -101,13 +100,13 @@ class Game:
         dt = self.clock.tick(FPS) / 1000
 
         if self.controls["up"]:
-            self.player.thrust_forward()
+            self.player.thrust_forward(dt)
         if self.controls["down"]:
-            self.player.thrust_backwards()
+            self.player.thrust_backwards(dt)
         if self.controls["right"]:
-            self.player.rotate_right()
+            self.player.rotate_right(dt)
         if self.controls["left"]:
-            self.player.rotate_left()
+            self.player.rotate_left(dt)
 
         for body in SpaceBody.space_bodies:
             body.update(dt)
