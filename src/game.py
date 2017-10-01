@@ -61,12 +61,12 @@ class Game:
         self.draw_statusbar(display)
 
         for body in SpaceBody.space_bodies:
-            pos_move = body.get_screen_pos(self.player, SCALE, SCREEN_WIDTH, SCREEN_HEIGHT)
+            pos_move, time = body.get_screen_pos(self.player, SCALE, SCREEN_WIDTH, SCREEN_HEIGHT)
             display.blit(body.image, body
                          .image.get_rect()
                          .move(*pos_move))
 
-            time_surface = self.font.render(str("%.1f" % body.t), True, (200, 238, 144))
+            time_surface = self.font.render(str("%.1f" % time), True, (200, 238, 144))
             x, y = pos_move
             self.display.blit(time_surface, (x, y - body.image.get_rect().height/2 - 8))
 
