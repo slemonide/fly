@@ -3,14 +3,13 @@ import math
 
 from .space_body import SpaceBody
 
-ACCELERATION = 0.1
+ACCELERATION = 0.01
 ROTATION_SPEED = 0.1
 
 
 class Player(SpaceBody):
     def __init__(self):
         super().__init__(0, 0)
-        self.vt = 1
         self.t = 0
 
         self.rotation = math.pi/2
@@ -19,12 +18,20 @@ class Player(SpaceBody):
         self.image = pygame.transform.rotate(self.up_image, self.rotation * 180/math.pi)
 
     def thrust_forward(self):
-        self.vx += ACCELERATION * math.cos(self.rotation)
-        self.vy += ACCELERATION * math.sin(self.rotation)
+        dvx = ACCELERATION * math.cos(self.rotation)
+        dvy = ACCELERATION * math.sin(self.rotation)
+
+        self.move(dvx, dvy)
 
     def thrust_backwards(self):
-        self.vx -= ACCELERATION * math.cos(self.rotation)
-        self.vy -= ACCELERATION * math.sin(self.rotation)
+        dvx = -ACCELERATION * math.cos(self.rotation)
+        dvy = -ACCELERATION * math.sin(self.rotation)
+
+        self.move(dvx, dvy)
+
+    def move(self, dvx, dvy):
+        self.vx = (self.vx + dvx) / (1 + abs(self.vx * dvx))
+        self.vy = (self.vy + dvy) / (1 + abs(self.vy * dvy))
 
     def rotate_right(self):
         self.rotation -= ROTATION_SPEED
