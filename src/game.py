@@ -40,13 +40,13 @@ class Game:
             self.update_environment()
 
     def draw_statusbar(self, display):
-        pygame.draw.rect(display, pygame.Color(200, 100, 40), pygame.Rect(0, 0, SCREEN_WIDTH, TEXT_HEIGHT + 5))
+        pygame.draw.rect(display, pygame.Color(191, 87, 0), pygame.Rect(0, 0, SCREEN_WIDTH, TEXT_HEIGHT + 5))
 
         surface = self.font.render("Time: " + str(self.player.t) + " seconds | " +
                                    "x: " + str(self.player.x) + " light seconds | " +
                                    "y: " + str(self.player.y) + " light seconds"
 
-                                   , True, (50, 100, 255))
+                                   , True, (144, 238, 144))
         self.display.blit(surface, (0, 0))
 
     def render_world(self, display):
