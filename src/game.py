@@ -6,11 +6,11 @@ from src.player import *
 from src.world import World
 from src.space_body import SpaceBody
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 1000
+SCREEN_HEIGHT = 700
 TEXT_HEIGHT = 20
 FPS = 60
-SCALE = 20 # 1 lsec is 20 pixels
+SCALE = 60 # 1 light sec is 60 pixels
 
 
 class Game:
@@ -34,7 +34,9 @@ class Game:
         self.world = World()
         self.player = Player()
 
-        Asteroid(10, 10)
+        Asteroid(2, 2)
+        Asteroid(0, 2)
+        Asteroid(2, 0)
         Asteroid(5, 5)
 
     def run(self):
@@ -59,9 +61,14 @@ class Game:
         self.draw_statusbar(display)
 
         for body in SpaceBody.space_bodies:
+            pos_move = body.get_screen_pos(self.player, SCALE, SCREEN_WIDTH, SCREEN_HEIGHT)
             display.blit(body.image, body
                          .image.get_rect()
-                         .move(*body.get_screen_pos(self.player, SCALE, SCREEN_WIDTH, SCREEN_HEIGHT)))
+                         .move(*pos_move))
+
+            time_surface = self.font.render(str("%.1f" % body.t), True, (200, 238, 144))
+            x, y = pos_move
+            self.display.blit(time_surface, (x, y - body.image.get_rect().height/2 - 8))
 
         pygame.display.flip()
 

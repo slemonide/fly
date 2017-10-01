@@ -3,14 +3,13 @@ import math
 
 from .space_body import SpaceBody
 
-ACCELERATION = 0.01
-ROTATION_SPEED = 0.1
+ACCELERATION = 0.1
+ROTATION_SPEED = 1
 
 
 class Player(SpaceBody):
     def __init__(self):
         super().__init__(0, 0)
-        self.t = 0
 
         self.rotation = math.pi/2
 
@@ -48,5 +47,3 @@ class Player(SpaceBody):
 
     def update(self, dt):
         super(Player, self).update(dt)
-
-        self.t += dt
