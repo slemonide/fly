@@ -9,7 +9,7 @@ from src.space_body import SpaceBody
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TEXT_HEIGHT = 20
-FPS = 25
+FPS = 60
 SCALE = 20 # 1 lsec is 20 pixels
 
 
@@ -20,6 +20,8 @@ class Game:
         Game.game = self
 
         pygame.init()
+        pygame.mixer.music.load("assets/music/420.wav")
+        pygame.mixer.music.play(loops=-1, start=0.0)
         self.clock = pygame.time.Clock()
 
         self.display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
