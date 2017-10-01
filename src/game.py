@@ -1,13 +1,15 @@
 import pygame
 import sys
+import datetime
 from src.asteroid import *
 from src.player import *
-
 from src.world import World
+from src.space_body import SpaceBody
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 TEXT_HEIGHT = 20
+FPS = 25
 
 
 class Game:
@@ -17,6 +19,7 @@ class Game:
         Game.game = self
 
         pygame.init()
+        self.clock = pygame.time.Clock()
 
         self.display = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
@@ -26,7 +29,9 @@ class Game:
 
         self.all_objects = []
         self.asteroids = []
+
         Asteroid(10, 10)
+        Asteroid(5, 5)
 
     def run(self):
         while True:
@@ -81,4 +86,7 @@ class Game:
                     self.player.rotate_left()
 
     def update_environment(self):
-        pass
+        dt = self.clock.tick(FPS) / 1000
+
+        for body in SpaceBody.space_bodies:
+            body.update(dt)
