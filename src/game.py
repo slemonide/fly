@@ -41,8 +41,9 @@ class Game:
         pygame.draw.rect(display, pygame.Color(191, 87, 0), pygame.Rect(0, 0, SCREEN_WIDTH, TEXT_HEIGHT + 5))
 
         surface = self.font.render("Time: " + str("%.1f" % self.player.t) + " seconds | " +
-                                   "x: " + str(self.player.x) + " light seconds | " +
-                                   "y: " + str(self.player.y) + " light seconds"
+                                   # "x: " + str(self.player.x) + " light seconds | " +
+                                   "x: " + "%.3f"%self.player.x + "light seconds | " +
+                                   "y: " + "%.3f"%self.player.y + " light seconds"
 
                                    , True, (144, 238, 144))
         self.display.blit(surface, (0, 0))
