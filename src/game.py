@@ -115,5 +115,4 @@ class Game:
         if self.controls["left"]:
             self.player.rotate_left(dt)
 
-        for body in SpaceBody.space_bodies:
-            body.update(dt)
+        self.player.update(dt)

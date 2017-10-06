@@ -8,26 +8,8 @@ class SpaceBody:
     def __init__(self, x, y):
         self.image = None
         SpaceBody.space_bodies.append(self)
-
         self.x = x
         self.y = y
-        self.x0 = x
-        self.y0 = y
-        self.t = 0
-        self.vx = 0
-        self.vy = 0
-        self.vx0 = 0
-        self.vy0 = 0
-        self.vt = 1
-
-    def update(self, dt):
-        self.x += self.vx * dt
-        self.y += self.vy * dt
-        self.t += self.vt * dt
-
-        # Can't exceed speed of light
-        assert abs(self.vx) <= 1
-        assert abs(self.vy) <= 1
 
     def get_screen_pos(self, player, scale, width, height):
         tp, xp, yp = self.get_primed_coordinates(player, player)

@@ -10,6 +10,10 @@ ROTATION_SPEED = 1
 class Player(SpaceBody):
     def __init__(self):
         super().__init__(0, 0)
+        self.t = 0
+        self.vt = 1
+        self.vy = 0
+        self.vx = 0
 
         self.rotation = math.pi/2
 
@@ -46,4 +50,10 @@ class Player(SpaceBody):
         self.image = pygame.transform.rotate(self.up_image, self.rotation * 180/math.pi)
 
     def update(self, dt):
-        super(Player, self).update(dt)
+        self.x += self.vx * dt
+        self.y += self.vy * dt
+        self.t += self.vt * dt
+
+        # Can't exceed speed of light
+        assert abs(self.vx) <= 1
+        assert abs(self.vy) <= 1
